@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream font-sans text-charcoal antialiased overflow-x-hidden;
+  }
+
+  ::selection {
+    @apply bg-gold/30 text-forest;
+  }
+}
+
+@layer components {
+  .container-premium {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+
+  .glass-panel {
+    @apply rounded-2xl border border-white/40 bg-white/60 shadow-glass backdrop-blur-xl;
+  }
+
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-forest px-8 py-3.5 text-sm font-medium tracking-wide text-cream transition-colors duration-300 hover:bg-charcoal;
+  }
+
+  .btn-outline-tea {
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full border border-forest/80 bg-transparent px-8 py-3.5 text-sm font-medium tracking-wide text-forest transition-all duration-300 hover:bg-forest hover:text-cream;
+  }
+
+  .section-eyebrow {
+    @apply mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-gold;
+  }
+
+  .heading-display {
+    @apply font-display text-4xl font-medium leading-[1.08] tracking-tight text-forest sm:text-5xl lg:text-6xl xl:text-7xl;
+  }
+
+  .heading-section {
+    @apply font-display text-3xl font-medium leading-tight text-forest sm:text-4xl lg:text-5xl;
+  }
+
+  .skeleton-shimmer {
+    @apply relative overflow-hidden rounded-xl bg-sand/40;
+  }
+
+  .skeleton-shimmer::after {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.55) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  .floating-label-input {
+    @apply w-full rounded-xl border border-sand/80 bg-white/80 px-4 pb-3 pt-6 text-charcoal outline-none transition-all duration-300 placeholder-transparent focus:border-forest focus:ring-2 focus:ring-forest/10;
+  }
+}
+
+/* Floating labels — peer utilities cannot be @apply'd */
+.floating-label-group {
+  position: relative;
+}
+
+.floating-label-group .floating-label-input {
+  width: 100%;
+}
+
+.floating-label-group .floating-label {
+  pointer-events: none;
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  font-size: 0.875rem;
+  color: rgba(17, 17, 17, 0.5);
+  transition: all 0.3s ease;
+}
+
+.floating-label-group .floating-label-input:focus + .floating-label,
+.floating-label-group .floating-label-input:not(:placeholder-shown) + .floating-label {
+  top: 0.5rem;
+  font-size: 0.75rem;
+  color: #1f3b2d;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom cursor glow — positioned via JS */
+.cursor-glow {
+  pointer-events: none;
+  position: fixed;
+  z-index: 9999;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196, 155, 102, 0.18) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.4s ease;
+  mix-blend-mode: multiply;
+}
